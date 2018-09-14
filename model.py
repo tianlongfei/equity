@@ -1,4 +1,4 @@
-from sqlalchemy import create_engine, Column, String, Int
+from sqlalchemy import create_engine, Column, String, Integer
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 # 创建基类
@@ -7,7 +7,7 @@ Base = declarative_base()
 class SecurityBasicInfo(Base):
 	__tablename__ = 'security_basic_info':
 
-	id = Column(Int(8), primary_key=True)
+	id = Column(Integer(8), primary_key=True)
 	ts_code = Column(String(20))
 	symbol = Column(String(20))
 	name = Column(String(20))
