@@ -1,9 +1,4 @@
-<<<<<<< HEAD
-from sqlalchemy import create_engine, Column, String, Integer
-from sqlalchemy.orm import sessionmaker
-=======
 from sqlalchemy import create_engine
->>>>>>> 1ea3b45c3edfbe63f21ac48f60756d424b229381
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, String, Float
 
@@ -11,33 +6,13 @@ engine = create_engine('mysql+pymysql://root:orange@localhost:3306/equity', echo
 Base = declarative_base()
 
 class SecurityBasicInfo(Base):
-<<<<<<< HEAD
-	__tablename__ = 'security_basic_info':
-
-	id = Column(Integer(8), primary_key=True)
-	ts_code = Column(String(20))
-	symbol = Column(String(20))
-	name = Column(String(20))
-	exchange_id = Column(String(20))
-	curr_type = Column(String(20))
-	list_status = Column(String(20))
-	list_date = Column(String(20))
-	delist_date = Column(String(20))
-	is_hs = Column(String(20))
-
-# 初始化数据库连接:
-engine = create_engine('mysql+mysqlconnector://root:password@localhost:3306/test')
-# 创建DBSession类型:
-DBSession = sessionmaker(bind=engine)
-session = DBSession()
-=======
 	__tablename__ = 'security_basic_info'
 
 	ts_code = Column(String(20), primary_key=True)	# TS股票代码
 	symbol = Column(String(20))	# 股票代码
 	name = Column(String(50))	# 股票名称
-	fullname = Column(String(50)) # 股票全称 
-	enname = Column(String(50))	# 英文全称
+	fullname = Column(String(200)) # 股票全称 
+	enname = Column(String(500))	# 英文全称
 	exchange_id = Column(String(20))	# 交易所代码  
 	curr_type = Column(String(20))	# 交易货币
 	list_status = Column(String(20))	# 上市状态 L上市 D退市 P暂停上市
@@ -49,10 +24,10 @@ class  BalanceSheet(Base):
 	__tablename__ = 'balane_sheet'
 
 	ts_code = Column(String(20), primary_key=True) # TS股票代码
-	ann_date = Column(String(20)) # 公告日期
-	f_ann_date = Column(String(20)) # 实际公告日期
-	end_date = Column(String(20)) # 报告期
-	report_type = Column(String(20)) # 报表类型：见下方详细说明
+	ann_date = Column(String(20), primary_key=True) # 公告日期，note：首次公告日期
+	f_ann_date = Column(String(20), primary_key=True) # 实际公告日期，note：最后一次公告日期，有些报告会修改几版，比如因为首次公告内容有错误
+	end_date = Column(String(20), primary_key=True) # 报告期
+	report_type = Column(String(20), primary_key=True) # 报表类型：见下方详细说明，1代表合并报表
 	comp_type = Column(String(20)) # 公司类型：1一般工商业 2银行 3保险 4证券
 	total_share = Column(Float(30))	# 期末总股本
 	cap_rese = Column(Float(30))	# 资本公积金
@@ -260,5 +235,10 @@ def creat_all_tables_not_exist():
 	# create tables which donot exist, so you should delet manually the already existing table if you want to re-create it
 	Base.metadata.create_all(engine)
 
-creat_all_tables_not_exist()
->>>>>>> 1ea3b45c3edfbe63f21ac48f60756d424b229381
+# creat_all_tables_not_exist()
+
+# important: 区分__table__和__tablename__，一个是Table()类，一个是表名字符串
+# print(SecurityBasicInfo.__table__, type(SecurityBasicInfo.__table__))
+# print(SecurityBasicInfo.__tablename__, type(SecurityBasicInfo.__tablename__))
+# print(BalanceSheet.__table__.c)
+
