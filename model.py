@@ -21,7 +21,7 @@ class SecurityBasicInfo(Base):
 	is_hs = Column(String(20))	# 是否沪深港通标的，N否 H沪股通 S深股通
 
 class  BalanceSheet(Base):
-	__tablename__ = 'balane_sheet'
+	__tablename__ = 'balance_sheet'
 
 	ts_code = Column(String(20), primary_key=True) # TS股票代码
 	ann_date = Column(String(20), primary_key=True) # 公告日期，note：首次公告日期
@@ -165,10 +165,10 @@ class IncomeStatement(Base):
 	__tablename__ = 'income_statement'
 
 	ts_code = Column(String(20), primary_key=True)	# TS股票代码
-	ann_date = Column(String(20))	# 公告日期
-	f_ann_date = Column(String(20))	# 实际公告日期，即发生过数据变更的最终日期
-	end_date = Column(String(20))	# 报告期
-	report_type = Column(String(20))	# 报告类型： 参考下表说明
+	ann_date = Column(String(20), primary_key=True)	# 公告日期
+	f_ann_date = Column(String(20), primary_key=True)	# 实际公告日期，即发生过数据变更的最终日期
+	end_date = Column(String(20), primary_key=True)	# 报告期
+	report_type = Column(String(20), primary_key=True)	# 报告类型： 参考下表说明
 	comp_type = Column(String(20))	# 公司类型：1一般工商业 2银行 3保险 4证券
 	basic_eps = Column(Float(30))	# 基本每股收益
 	diluted_eps = Column(Float(30))	# 稀释每股收益
@@ -231,11 +231,6 @@ class IncomeStatement(Base):
 	distable_profit = Column(Float(30))	# 可分配利润
 
 
-def creat_all_tables_not_exist():
-	# create tables which donot exist, so you should delet manually the already existing table if you want to re-create it
-	Base.metadata.create_all(engine)
-
-# creat_all_tables_not_exist()
 
 # important: 区分__table__和__tablename__，一个是Table()类，一个是表名字符串
 # print(SecurityBasicInfo.__table__, type(SecurityBasicInfo.__table__))

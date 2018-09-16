@@ -1,44 +1,57 @@
 TT(todo today): 
-todo: 
-完成save_list_to_txt, read_list_from_txt，访问tushare异常的二次更新，访问tushare正常获取0条数据的二次更新
 
-完整的数据更新流程：
-1. 执行正常更新脚本（正常访问tushare的股票数据保存到数据库，访问tushare异常的股票ts_code保存到文件exception.txt）
-2. 手工执行补全脚本（读取exception.txt，访问tushare获取数据，补全脚本的输入不一样，其余逻辑跟正常更新脚本完全一样）
-3. 日志保存功能（打印的文本存起来）
-todo: 数据库表格结构的创建和更新：基于sqlalchemy
+访问tushare卡住的彻底解决：跳出继续。
+
+
 todo: 人工从东财客户端导出每个企业财务数据的excel（不知可否一次导出一年所有企业，或一次导出一个企业所有年份的），人工或程序整理成标准格式，录入数据库。
 	todo：问东财，可否一次导出一年所有企业，或一次导出一个企业所有年份的
 
-测试股票池：000333.SZ
+-------------------------------
+数据库建设：
+	股票基本信息表，
+	资产负债表，
+	利润表，
+	现金流量表
 
-数据源：
+1.1 数据源：
 √ tushare：财报有些不准，但目前是最准的，而且最方便。
 × 聚宽：财报数据不如tushare准
 × 爬虫门户网站：不准，而且开发代价大
-todo(pending): 米筐，优矿，京东量化。初步看文档，资产负债表条目少，估计不准确，暂时不看了，但可以几个月关注一次可能的升级。
+pending: 米筐，优矿，京东量化。初步看文档，资产负债表条目少，估计不准确，暂时不看了，但可以几个月关注一次可能的升级。
 todo: 人工从东财客户端导出每个企业财务数据的excel（不知可否一次导出一年所有企业，或一次导出一个企业所有年份的），人工或程序整理成标准格式，录入数据库。
-todo(pending): 下载公开的财报pdf，人工或机器转成word，找到报表部分，人工或程序整理成标准格式，录入数据库。从根本解决问题，不花钱或少花钱，数据100%准确，但工作量最大。
+pending: 下载公开的财报pdf，人工或机器转成word，找到报表部分，人工或程序整理成标准格式，录入数据库。从根本解决问题，不花钱或少花钱，数据100%准确，但工作量最大。
 
-表格结构维护：
+
+1.2 表格结构维护：
 todo: 
-表格结构的创建和更新：基于sqlalchemy，
+表格结构的创建和更新：基于sqlalchemy，alembic
 steps：
 1. 维护model.py文件中定义每个表格对应的类；
-2. 每次model.py文件修改后，执行model_update.py文件，完成所有表格的创建/删除，列的增加/删除，主键外键等。
-detail:
-√ 创建不存在的新表：Base.metadata.create_all(engine)
-√ 删除表结构和内容：手动删除
-√ 删除表结构和内容，再新建新表：手动删除 + Base.metadata.create_all(engine)
-数据不删除，修改表名，增加/减少列：
-更新数据：update
+2. 每次model.py文件修改后，执行alembic
 
-includes：
-股票基本信息表，资产负债表，利润表，现金流量表
 
-数据的更新：
-√ 方法1：delete+insert
-todo：数据的更新，方法2：update(如果有更新，如果没有创建？)
+1.3 数据的更新：
+1.3.1 步骤：
+执行update_bs_all()。
+         ↓
+         ↓程序中断：比如程序卡住，只能手动中断；比如出现其他为止问题，导致程序中断。
+         ↓
+再次执行update_bs_all()，直到程序正常结束。
+		 ↓
+		 ↓
+		 ↓
+执行update_bs_from_file()，将except_ts_code_list_d_***，null_ts_code_list_d_***中的基金重新查询。
+
+note：可将每一个step中的except，null的ts_code从already_list.txt中排出，这样可以省去update_bs_from_file()，但也无法记录过程中except和null的情况，所以还是保持现在这个方案。
+
+1.3.2 逻辑：
+update_bs_all()
+首先，获取所有ts_code列表，和已经查询过的already_list列表，两个列表相减得到本次要查询tushare的ts_code列表
+其次，将ts_code列表按step(默认100)长度分割成len(ts_code)/step个片段：
+	按片段查询数据，写入数据库。
+	每个片段中，出现tushare的查询语句报出exception，或者tushare的查询语句正常执行但返回结果为null，将ts_code分别保存到文件中。
+	每个片段结束后，将该片段所有的ts_code（包括excepttion，null的情况）添加到already_list.txt。
+
 
 标记财报条目的分类：建立分类表，对每个条目进行归类
 资产负债表：
