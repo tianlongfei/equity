@@ -235,9 +235,3 @@ def update_income_statement(start_date, end_date, is_all_ts_code=True, ts_code_f
 # update_income_statement('20170101', '20180801', is_all_ts_code=True)
 
 # 正在更新：20170101-20180801，balance_sheet
-
-
-
-
-
-
