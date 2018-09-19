@@ -23,12 +23,12 @@
 # func(1,2)
 
 
-# import sys
-# from os import path
-# sys.path.append( path.dirname( path.dirname( path.abspath(__file__) ) ) )
-# print(__file__)
-# print(path.dirname( path.abspath(__file__) ))
-# print(path.dirname( path.dirname( path.abspath(__file__) ) ) )
+import sys
+from os import path
+sys.path.append( path.dirname( path.dirname( path.abspath(__file__) ) ) )
+print(__file__)
+print(path.dirname( path.abspath(__file__) ))
+print(path.dirname( path.dirname( path.abspath(__file__) ) ) )
 
 # def test():
 # 	a = 1
