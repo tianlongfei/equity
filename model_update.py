@@ -149,7 +149,6 @@ def update_bs_from_file(ts_code_file, start_date, end_date, step=50, already_lis
 		save_list_to_txt(except_list, except_list_file)
 
 
-
 def update_income_statement(start_date, end_date, ts_code_list):
 	if len(ts_code_list) == 0:
 		print('ts_code_list is null')
@@ -360,3 +359,8 @@ def update_cf_from_file(ts_code_file, start_date, end_date, step=50, already_lis
 
 		save_list_to_txt(already_list, already_list_file)
 		save_list_to_txt(except_list, except_list_file)
+
+
+def update_category():
+	# model.CategoryBalanceSheet
+	pass

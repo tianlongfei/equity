@@ -7,7 +7,7 @@ from model_update import update_cf_all, update_cf_from_file
 # 数据库结构维护：
 ########################################################
 
-# 1. 创建程序中定义而数据库中未创建的表，但不会删除程序中未定义而数据库中已有的表
+# 1. 创建程序中定义而数据库中未创建的表，不会修改数据库中已有的表
 # creat_all_tables_not_exist()
 
 # 2. 基于Alembic
@@ -24,7 +24,7 @@ from model_update import update_cf_all, update_cf_from_file
 ########################################################
 
 # 更新基础数据表：security_basic_info
-# update_security_basic_info()
+update_security_basic_info()
 
 
 # 更新财务报表：
@@ -48,10 +48,10 @@ from model_update import update_cf_all, update_cf_from_file
 
 
 # 更新现金流量表：income_statement
-start_date = '20130101'
-end_date = '20181231'
+# start_date = '20130101'
+# end_date = '20181231'
 # update_cf_all(start_date, end_date)
-update_cf_from_file('p_ts_code_file.txt', start_date, end_date)
+# update_cf_from_file('p_ts_code_file.txt', start_date, end_date)
 
 
 

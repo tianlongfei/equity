@@ -326,7 +326,16 @@ class CashFlowSheet(Base):
 	beg_bal_cash_equ = Column(Float(30))	# 减:现金等价物的期初余额
 	im_n_incr_cash_equ = Column(Float(30))	# 现金及现金等价物净增加额(间接法)
 
-	
+
+class CategoryBalanceSheet(Base):
+	__tablename__ = 'category_bs'
+
+	cid = Column(Integer(), primary_key=True)
+	cname = Column(String(50))
+	category_1 = Column(String(50))
+	category_2 = Column(String(50))
+
+
 # important: 区分__table__和__tablename__，一个是Table()类，一个是表名字符串
 # print(SecurityBasicInfo.__table__, type(SecurityBasicInfo.__table__))
 # print(SecurityBasicInfo.__tablename__, type(SecurityBasicInfo.__tablename__))
