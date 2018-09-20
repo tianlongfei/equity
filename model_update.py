@@ -54,6 +54,7 @@ def update_balance_sheet(start_date, end_date, ts_code_list):
 	# get balance sheet data for each ts_code
 	for ts_code in ts_code_list:
 		try:
+			print('trying to get ts_code = %s' % ts_code)
 			d = pro.balancesheet(ts_code=ts_code, start_date=start_date, end_date=end_date, report_type='1')
 		except:
 			except_ts_code_list.append(ts_code)
@@ -69,7 +70,7 @@ def update_balance_sheet(start_date, end_date, ts_code_list):
 		print("get total: %s rows" % len(data))
 		sleep(0.1)	# 0.1 second
 
-	print("get %s rows from tushare, data.shape=" % data.shape[0], data.shape)
+	print("totally get %s rows from tushare, data.shape=" % data.shape[0], data.shape)
 	print('except number: %s, except_ts_code_list: %s' % (len(except_ts_code_list), except_ts_code_list))
 
 	if data.shape[0] == 0:
@@ -110,8 +111,10 @@ def update_bs_all(start_date, end_date, step=50, already_list_file='p_already_li
 	ts_code_list = basics_df.to_dict(orient='list')['ts_code']
 
 	already_list = read_list_from_txt(already_list_file)
-	except_list = []
-	
+
+	# 无需从except_list中读取，因为already_list中已经除去exception的ts_code，所以except_list每次从零开始，只保存本次执行过程中断前的except_list即可
+	except_list = []	# 无需从except_list中读取，因为already_list中已经除去exception的ts_code，所以except_list每次从零开始，只保存本次执行过程中断前的except_list即可
+
 	ts_code_list = list(set(ts_code_list) - set(already_list))
 	print('开始获取BalanceSheet的数据，ts_code的数量：%s个' % len(ts_code_list))
 
@@ -160,6 +163,7 @@ def update_income_statement(start_date, end_date, ts_code_list):
 	# get balance sheet data for each ts_code
 	for ts_code in ts_code_list:
 		try:
+			print('trying to get ts_code = %s' % ts_code)
 			d = pro.income(ts_code=ts_code, start_date=start_date, end_date=end_date, report_type='1')
 		except:
 			except_ts_code_list.append(ts_code)
@@ -266,6 +270,7 @@ def update_cash_flow(start_date, end_date, ts_code_list):
 	# get balance sheet data for each ts_code
 	for ts_code in ts_code_list:
 		try:
+			print('trying to get ts_code = %s' % ts_code)
 			d = pro.cashflow(ts_code=ts_code, start_date=start_date, end_date=end_date, report_type='1')
 		except:
 			except_ts_code_list.append(ts_code)

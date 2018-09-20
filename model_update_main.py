@@ -34,23 +34,23 @@ update_security_basic_info()
 # step3：回到step1。
 
 # 更新资产负债表：balance_sheet
-# start_date = '20130101'
-# end_date = '20151231'
+# start_date = '20000101'
+# end_date = '20180831'
 # update_bs_all(start_date, end_date)
 # update_bs_from_file('p_ts_code_file.txt', start_date, end_date)
 
 
 # 更新利润表：income_statement
-# start_date = '20130101'
-# end_date = '20181231'
+# start_date = '20000101'
+# end_date = '20180831'
 # update_is_all(start_date, end_date)
 # update_is_from_file('p_ts_code_file.txt', start_date, end_date)
 
 
 # 更新现金流量表：income_statement
-# start_date = '20130101'
-# end_date = '20181231'
-# update_cf_all(start_date, end_date)
+start_date = '20000101'
+end_date = '20180831'
+update_cf_all(start_date, end_date)
 # update_cf_from_file('p_ts_code_file.txt', start_date, end_date)
 
 
