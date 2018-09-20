@@ -23,12 +23,12 @@
 # func(1,2)
 
 
-import sys
-from os import path
-sys.path.append( path.dirname( path.dirname( path.abspath(__file__) ) ) )
-print(__file__)
-print(path.dirname( path.abspath(__file__) ))
-print(path.dirname( path.dirname( path.abspath(__file__) ) ) )
+# import sys
+# from os import path
+# sys.path.append( path.dirname( path.dirname( path.abspath(__file__) ) ) )
+# print(__file__)
+# print(path.dirname( path.abspath(__file__) ))
+# print(path.dirname( path.dirname( path.abspath(__file__) ) ) )
 
 # def test():
 # 	a = 1
@@ -64,4 +64,17 @@ print(path.dirname( path.dirname( path.abspath(__file__) ) ) )
 # list2 = [1, 2, 3, 4, 0]
 # list3 = list(set(list1) - set(list2))
 # print(list3)
+
+
+
+import time
+
+def isValidDate(date):
+	try:
+		t = time.strptime(date, '%Y%m%d')
+		return True
+	except:
+		return False
+
+print(isValidDate('20180101'))
 

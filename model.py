@@ -20,7 +20,7 @@ class SecurityBasicInfo(Base):
 	delist_date = Column(String(20))	# 退市日期
 	is_hs = Column(String(20))	# 是否沪深港通标的，N否 H沪股通 S深股通
 
-class  BalanceSheet(Base):
+class BalanceSheet(Base):
 	__tablename__ = 'balance_sheet'
 
 	ts_code = Column(String(20), primary_key=True) # TS股票代码
@@ -326,9 +326,26 @@ class CashFlowSheet(Base):
 	beg_bal_cash_equ = Column(Float(30))	# 减:现金等价物的期初余额
 	im_n_incr_cash_equ = Column(Float(30))	# 现金及现金等价物净增加额(间接法)
 
-	
+
+class CategoryBalanceSheet(Base):
+	__tablename__ = 'category_bs'
+
+	cid = Column(Integer(), primary_key=True)
+	name = Column(String(100))
+	tushare_note = Column(String(100))
+	standard_note = Column(String(500))
+	category1_general = Column(String(100))
+	category1_general_wc = Column(String(100))
+	category2_bank = Column(String(100))
+	category3_insurrance = Column(String(100))
+	category4_broker = Column(String(100))
+
 # important: 区分__table__和__tablename__，一个是Table()类，一个是表名字符串
 # print(SecurityBasicInfo.__table__, type(SecurityBasicInfo.__table__))
 # print(SecurityBasicInfo.__tablename__, type(SecurityBasicInfo.__tablename__))
 # print(BalanceSheet.__table__.c)
+
+
+
+
 
