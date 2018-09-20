@@ -1,6 +1,5 @@
 TT(todo today): 
 
-访问tushare卡住的彻底解决：跳出继续。
 
 
 todo: 人工从东财客户端导出每个企业财务数据的excel（不知可否一次导出一年所有企业，或一次导出一个企业所有年份的），人工或程序整理成标准格式，录入数据库。
@@ -24,39 +23,43 @@ pending: 下载公开的财报pdf，人工或机器转成word，找到报表部�
 
 1.2 表格结构维护：
 todo: 
-表格结构的创建和更新：基于sqlalchemy，alembic
-steps：
-1. 维护model.py文件中定义每个表格对应的类；
-2. 每次model.py文件修改后，执行alembic
+√ 表格结构的创建和更新：基于sqlalchemy，alembic
+	steps：
+	1. 维护model.py文件中定义每个表格对应的类；
+	2. 每次model.py文件修改后，执行alembic
 
 
 1.3 数据的更新：
 1.3.1 步骤：
-执行update_bs_all()。
+第一步：执行update_bs_all()。
          ↓
-         ↓程序中断：比如程序卡住，只能手动中断；比如出现其他为止问题，导致程序中断。
+         ↓程序中断：比如程序卡住，手动中断；比如出现其他为止问题，导致程序中断。
          ↓
-再次执行update_bs_all()，直到程序正常结束。
+第二步：再次执行update_bs_all()，直到程序正常结束。
 		 ↓
+		 ↓检查expept_list.txt文件是否有值，如果有，第三步。
 		 ↓
-		 ↓
-执行update_bs_from_file()，将except_ts_code_list_d_***，null_ts_code_list_d_***中的基金重新查询。
+第三步：再次回到步骤1。
 
-note：可将每一个step中的except，null的ts_code从already_list.txt中排出，这样可以省去update_bs_from_file()，但也无法记录过程中except和null的情况，所以还是保持现在这个方案。
 
 1.3.2 逻辑：
 update_bs_all()
-首先，获取所有ts_code列表，和已经查询过的already_list列表，两个列表相减得到本次要查询tushare的ts_code列表
+首先，获取所有ts_code列表，读取already_list列表，两个列表相减得到本次要查询tushare的ts_code列表
 其次，将ts_code列表按step(默认100)长度分割成len(ts_code)/step个片段：
 	按片段查询数据，写入数据库。
-	每个片段中，出现tushare的查询语句报出exception，或者tushare的查询语句正常执行但返回结果为null，将ts_code分别保存到文件中。
-	每个片段结束后，将该片段所有的ts_code（包括excepttion，null的情况）添加到already_list.txt。
+	每个片段中，出现tushare的查询语句报出exception，计入e。
+	每个片段结束后，将该片段成功查询的ts_code添加到already_list.txt，报exception的ts_code加入except_list。
 
 
 标记财报条目的分类：建立分类表，对每个条目进行归类
-资产负债表：
+资产负债表：done
 利润表：
 现金流量表：
 
+
 资本结构：比例分析，变化趋势分析
 成本结构：比例分析，变化趋势分析
+
+统计每个指数的财务报表，资本结构，成本结构
+
+指标的分布：资本结构指标
