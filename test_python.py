@@ -42,8 +42,9 @@
 
 
 
-# thelist = ['a', 1, 'c', 2]
-# print(','.join(map(str, thelist)))
+thelist = ['a', 1, 'c', 2]
+thestr = '"' + '","'.join(map(str, thelist)) + '"'
+print(thestr)
 
 # f = open('thelist.txt', 'w')
 # f.write(','.join(map(str, thelist)))
@@ -67,14 +68,14 @@
 
 
 
-import time
+# import time
 
-def isValidDate(date):
-	try:
-		t = time.strptime(date, '%Y%m%d')
-		return True
-	except:
-		return False
+# def isValidDate(date):
+# 	try:
+# 		t = time.strptime(date, '%Y%m%d')
+# 		return True
+# 	except:
+# 		return False
 
-print(isValidDate('20180101'))
+# print(isValidDate('20180101'))
 
