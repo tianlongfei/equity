@@ -7,7 +7,6 @@ from model_update_finreports import update_is_all, update_is_from_file
 from model_update_finreports import update_cf_all, update_cf_from_file
 from model_update_category import update_category_bs
 
-
 usage_prompt = """
 参考命令示例：
 python model_update_main.py update security_basic_info 
@@ -15,6 +14,7 @@ python model_update_main.py update balance_sheet 20000101 20180831
 python model_update_main.py update income_statement 20000101 20180831
 python model_update_main.py update cash_flow_sheet 20000101 20180831
 python model_update_main.py update category_bs
+python model_update_main.py create 
 """
 
 
@@ -27,14 +27,14 @@ def isValidDate(date):
 
 
 if __name__ == '__main__':
-	if len(sys.argv) < 3:
+	if len(sys.argv) < 2:
 		print('参数不够, ', usage_prompt)
 		exit(1)
 
 	task = sys.argv[1]
-	table = sys.argv[2]
 
-	if task == 'update':
+	if task == 'update' and len(sys.argv) >= 3:
+		table = sys.argv[2]
 		if table == 'security_basic_info' and len(sys.argv) == 3:
 			update_security_basic_info()
 		elif table == 'balance_sheet' and len(sys.argv) == 5 and isValidDate(sys.argv[3]) and isValidDate(sys.argv[4]):
@@ -53,7 +53,7 @@ if __name__ == '__main__':
 			update_category_bs()
 		else:
 			print('参数不正确, ', usage_prompt)
-	elif sys.argv[1] == 'create_table_if_not_exist' and len(sys.argv) == 2:
+	elif task == 'create' and len(sys.argv) == 2:
 		creat_all_tables_not_exist()
 	else:
 		print('参数不正确, ', usage_prompt)
