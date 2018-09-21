@@ -51,15 +51,22 @@ update_bs_all()
 	每个片段结束后，将该片段成功查询的ts_code添加到already_list.txt，报exception的ts_code加入except_list。
 
 
-标记财报条目的分类：建立分类表，对每个条目进行归类
-资产负债表：done
-利润表：
-现金流量表：
+
+资本结构分析：比例分析，变化趋势分析
+	建立资产负债表每个条目的分类表：category_bs：done
+	计算和存储资本结构数据：cap_sturct_detail, cap_struct_agg	doing
 
 
-资本结构：比例分析，变化趋势分析
 成本结构：比例分析，变化趋势分析
 
 统计每个指数的财务报表，资本结构，成本结构
 
+
 指标的分布：资本结构指标
+
+
+
+
+
+
+

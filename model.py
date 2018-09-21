@@ -335,6 +335,7 @@ class CategoryBalanceSheet(Base):
 	tushare_note = Column(String(100))
 	standard_note = Column(String(500))
 	category1_general = Column(String(100))
+	category1_wc_note = Column(String(100))
 	category1_wc = Column(String(100))
 	category2_bank = Column(String(100))
 	category3_insurrance = Column(String(100))

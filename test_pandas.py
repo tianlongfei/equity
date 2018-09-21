@@ -3,9 +3,10 @@ import pandas as pd
 df = pd.DataFrame({'A': [1, 2, 3, 4, 5, 1, None], 
 				   'B': ['x', 'y', 'z', 'w', 'v', 'u', 'v']}, index=list('abcdefg'))
 print(df)
-
 print(df.notnull())
-print(df.where(df.notnull(), other=None))
+df = df.where(df.notnull(), other=None)
+print(df)
+df = df.where(df.notnull(), other=0.0)
 print(df)
 
 # 检查重复，去重
