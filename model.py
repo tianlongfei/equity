@@ -330,22 +330,80 @@ class CashFlowSheet(Base):
 class CategoryBalanceSheet(Base):
 	__tablename__ = 'category_bs'
 
-	cid = Column(Integer(), primary_key=True)
-	name = Column(String(100))
-	tushare_note = Column(String(100))
-	standard_note = Column(String(500))
-	category1_general = Column(String(100))
-	category1_wc_note = Column(String(100))
-	category1_wc = Column(String(100))
-	category2_bank = Column(String(100))
-	category3_insurrance = Column(String(100))
-	category4_broker = Column(String(100))
+	cid = Column(Integer(), primary_key=True)	# 自增主键
+	name = Column(String(100))	# tushare的资产负债表中的每一个条目名称
+	tushare_note = Column(String(100))	# tushare网站的资产负债表条目说明
+	standard_note = Column(String(500))	# 我整理的资产负债表条目说明
+	category1_general = Column(String(100))	# 分类1（对一般工商业企业）：标准的分类，包括流动资产、非流动资产、流动负债、非流动负债、股东权益、少数股东权益。
+	category1_wc_note = Column(String(100))	# 分类1（对一般工商业企业）：按运营资本、投入资本方式的分类，中文说明
+	category1_wc = Column(String(100))	# 分类1（对一般工商业企业）：按运营资本、投入资本方式的分类，英文名
+	category2_bank = Column(String(100))	# 分类2（对银行企业）
+	category3_insurrance = Column(String(100))	# 分类3（对保险企业）
+	category4_broker = Column(String(100))	# 分类4（对券商企业）
+
+
+class CategoryBalanceSheetAgg(Base):
+	__tablename__ = 'category_bs_agg'
+
+	cid = Column(Integer(), primary_key=True)	# 自增主键
+	category1_wc = Column(String(100))	# wc资产配置的分类
+	category1_wc_note = Column(String(100))	# # wc分类的note
+	category1_wc_agg_note = Column(String(100))	# agg note
+	category1_wc_agg = Column(String(100))	# agg
+
+
+class CapStructGeneralDetail(Base):
+	__tablename__ = 'cap_struct_general_detail'
+
+	ts_code = Column(String(20), primary_key=True)	# TS股票代码
+	end_date = Column(String(20), primary_key=True)	# 报告期
+	cash  = Column(Float(30))	# 现金
+	wc_plus = Column(Float(30))	# 营运资本+
+	wc_minus = Column(Float(30))	# 营运资本-
+	ppe = Column(Float(30))	# 固定资产
+	intangible_assets = Column(Float(30))	# 无形资产
+	goodwill = Column(Float(30))	# 商誉
+	invest_held_for_trade = Column(Float(30))	# 交易性自融资产
+	invest_available_for_sale = Column(Float(30))	# 可供出售金融资产
+	invest_equity_investee = Column(Float(30))	# 股权投资
+	liability_shortterm = Column(Float(30))	# 短期债务
+	liability_longterm = Column(Float(30))	# 长期债务
+	equity_plus = Column(Float(30))	# 股东权益+
+	equity_minus = Column(Float(30))	# 股东权益-
+	current_assets_all = Column(Float(30))	# 流动资产合计
+	non_current_assets_all = Column(Float(30))	# 非流动资产合计
+	assets_all = Column(Float(30))	# 资产合计
+	current_liability_all = Column(Float(30))	# 流动负债合计
+	non_current_liability_all = Column(Float(30))	# 非流动负债合计
+	liability_all = Column(Float(30))	# 负债合计
+	equity_shareholders_only = Column(Float(30))	# 股东权益（不包含少数股东权益）
+	minority_interests = Column(Float(30))	# 少数股东权益
+	equity_all = Column(Float(30))	# 股东权益合计（含少数股东权益）
+	liability_equity_all = Column(Float(30))	# 负债和股东权益合计，等于资产合计
+	uncategory = Column(Float(30))	# 未分类项目
+
+
+class CapStructGeneralAgg(Base):
+	__tablename__ = 'cap_struct_general_agg'
+
+	ts_code = Column(String(20), primary_key=True)	# TS股票代码
+	end_date = Column(String(20), primary_key=True)	# 报告期
+	cash_all = Column(Float(30))	# 现金类资产总计，包括现金，其他流动资产（因为关注企业这一项基本是理财产品），交易性金融资产，
+	wc_net = Column(Float(30))	# 营运资本
+	ppe = Column(Float(30))	# 固定资产
+	intangible_goodwill = Column(Float(30))	# 无形资产和商誉
+	invest_available_for_sale = Column(Float(30))	# 可供出售金融资产
+	invest_equity_investee = Column(Float(30))	# 股权投资
+	liability_interest_bearing = Column(Float(30))	# 短期债务 + 长期债务
+	equity_net = Column(Float(30))	# 股东权益合计（含少数股东权益）
+	invested_capital = Column(Float(30))	# 投入资本 = 有息负债 + 股东权益
+
+
 
 # important: 区分__table__和__tablename__，一个是Table()类，一个是表名字符串
 # print(SecurityBasicInfo.__table__, type(SecurityBasicInfo.__table__))
 # print(SecurityBasicInfo.__tablename__, type(SecurityBasicInfo.__tablename__))
 # print(BalanceSheet.__table__.c)
-
 
 
 
