@@ -12,12 +12,12 @@ usage_prompt = """
 参考命令示例：
 python model_main.py create 
 python model_main.py update security_basic_info 
-python model_main.py update balance_sheet 20000101 20180831 (日期为报表披露日期的起止范围)
-python model_main.py update income_statement 20000101 20180831 (日期为报表发布日期的起止范围)
-python model_main.py update cash_flow_sheet 20000101 20180831 (日期为报表发布日期的起止范围)
+python model_main.py update balance_sheet 20000101 20180831 (日期为财报发布日期的起止范围)
+python model_main.py update income_statement 20000101 20180831 (日期为财报发布日期的起止范围)
+python model_main.py update cash_flow_sheet 20000101 20180831 (日期为财报发布日期的起止范围)
 python model_main.py update category_bs (数据源：当前目录下category.xlsx的balance表)
 python model_main.py update category_bs_agg (数据源：当前目录下category.xlsx的agg表)
-python mode_main.py update cap_struct 20000101 20180831 (日期为end_date的起止范围，如2018年Q2的财报end_date为20180630)
+python mode_main.py update cap_struct 20000101 20180831 (日期为财报end_date的起止范围，如2018年Q2的财报end_date为20180630)
 
 """
 
