@@ -68,7 +68,7 @@ def cal_cap_struct_general(ts_code_list, start_date, end_date):
 	# print(cap_struct_agg)
 	cap_struct_agg.drop(columns=['-'], inplace=True)	# drop 名称为"-"的column
 	cap_struct_agg.eval('invested_capital = liability_interest_bearing + equity_net', inplace=True)
-	cap_struct_agg.to_excel('test.xlsx')
+	# cap_struct_agg.to_excel('test.xlsx')
 	return cap_struct_detail, cap_struct_agg
 
 	# todo: join and groupby category1_wc, insert into database table	done

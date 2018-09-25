@@ -357,15 +357,16 @@ class CapStructGeneralDetail(Base):
 
 	ts_code = Column(String(20), primary_key=True)	# TS股票代码
 	end_date = Column(String(20), primary_key=True)	# 报告期
-	cash  = Column(Float(30))	# 现金
+	cash_plus  = Column(Float(30))	# 现金+：包括现金，其他流动资产（主要是理财），投资性房地产，衍生金融资产
+	cash_minus = Column(Float(30))	# 现金－：包括预计负债
 	wc_plus = Column(Float(30))	# 营运资本+
 	wc_minus = Column(Float(30))	# 营运资本-
 	ppe = Column(Float(30))	# 固定资产
 	intangible_assets = Column(Float(30))	# 无形资产
 	goodwill = Column(Float(30))	# 商誉
-	invest_held_for_trade = Column(Float(30))	# 交易性自融资产
+	invest_held_for_trade = Column(Float(30))	# 交易性金融资产
 	invest_available_for_sale = Column(Float(30))	# 可供出售金融资产
-	invest_equity_investee = Column(Float(30))	# 股权投资
+	invest_equity_investee = Column(Float(30))	# 长期股权投资：一般是联营企业
 	liability_shortterm = Column(Float(30))	# 短期债务
 	liability_longterm = Column(Float(30))	# 长期债务
 	equity_plus = Column(Float(30))	# 股东权益+
@@ -388,7 +389,7 @@ class CapStructGeneralAgg(Base):
 
 	ts_code = Column(String(20), primary_key=True)	# TS股票代码
 	end_date = Column(String(20), primary_key=True)	# 报告期
-	cash_all = Column(Float(30))	# 现金类资产总计，包括现金，其他流动资产（因为关注企业这一项基本是理财产品），交易性金融资产，
+	cash_all = Column(Float(30))	# 现金类资产总计，等于cash_plus + 交易性金融资产 - cash_minus
 	wc_net = Column(Float(30))	# 营运资本
 	ppe = Column(Float(30))	# 固定资产
 	intangible_goodwill = Column(Float(30))	# 无形资产和商誉
