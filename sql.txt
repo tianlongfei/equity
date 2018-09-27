@@ -2,34 +2,3 @@ SELECT ts_code, cash_all/invested_capital, wc_net/invested_capital, ppe/invested
 invest_equity_investee/invested_capital, liability_interest_bearing/invested_capital, equity_net/invested_capital 
 FROM cap_struct_general_agg WHERE end_date = '20180331' order by cash_all/invested_capital DESC
 
-
-matplotlib_styles = ['bmh', 'classic', 'dark_background', 'fast', 'fivethirtyeight', 'ggplot', 'grayscale', 'seaborn-bright', 'seaborn-colorblind', 'seaborn-dark-palette', 'seaborn-dark', 'seaborn-darkgrid', 'seaborn-deep', 'seaborn-muted', 'seaborn-notebook', 'seaborn-paper', 'seaborn-pastel', 'seaborn-poster', 'seaborn-talk', 'seaborn-ticks', 'seaborn-white', 'seaborn-whitegrid', 'seaborn', 'Solarize_Light2', 'tableau-colorblind10', '_classic_test']
-
-
-
-plt.style.use('bmh')
-plt.style.use('classic')
-plt.style.use('dark_background')
-plt.style.use('fast')
-plt.style.use('fivethirtyeight')
-plt.style.use('ggplot')
-plt.style.use('grayscale')
-plt.style.use('seaborn-bright')
-plt.style.use('seaborn-colorblind')
-plt.style.use('seaborn-dark-palette')
-plt.style.use('seaborn-dark')
-plt.style.use('seaborn-darkgrid')
-plt.style.use('seaborn-deep')
-plt.style.use('seaborn-muted')
-plt.style.use('seaborn-notebook')
-plt.style.use('seaborn-paper')
-plt.style.use('seaborn-pastel')
-plt.style.use('seaborn-poster')
-plt.style.use('seaborn-talk')
-plt.style.use('seaborn-ticks')
-plt.style.use('seaborn-white')
-plt.style.use('seaborn-whitegrid')
-plt.style.use('seaborn')
-plt.style.use('Solarize_Light2')
-plt.style.use('tableau-colorblind10')
-plt.style.use('_classic_test')
