@@ -1,0 +1,4 @@
+SELECT ts_code, cash_all/invested_capital, wc_net/invested_capital, ppe/invested_capital, intangible_goodwill/invested_capital, invest_available_for_sale/invested_capital, 
+invest_equity_investee/invested_capital, liability_interest_bearing/invested_capital, equity_net/invested_capital 
+FROM cap_struct_general_agg WHERE end_date = '20180331' order by cash_all/invested_capital DESC
+
