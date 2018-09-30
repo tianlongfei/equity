@@ -1,6 +1,6 @@
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Column, Integer, String, Float
+from sqlalchemy import Column, Integer, String, Float, DateTime, Date
 
 engine = create_engine('mysql+pymysql://root:orange@localhost:3306/equity', echo=False)
 Base = declarative_base()
@@ -398,6 +398,15 @@ class CapStructGeneralAgg(Base):
 	liability_interest_bearing = Column(Float(30))	# 短期债务 + 长期债务
 	equity_net = Column(Float(30))	# 股东权益合计（含少数股东权益）
 	invested_capital = Column(Float(30))	# 投入资本 = 有息负债 + 股东权益
+
+
+class IndexWeight(Base):
+	__tablename__ = 'index_weight'
+
+	trade_date = Column(String(20), primary_key=True)
+	index_code = Column(String(20), primary_key=True)
+	con_code = Column(String(20), primary_key=True)	# ts_code
+	weight = Column(Float(30))
 
 
 

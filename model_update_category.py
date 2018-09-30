@@ -9,7 +9,7 @@ engine = create_engine('mysql+pymysql://root:orange@localhost:3306/equity', echo
 
 def update_category_bs():
 	# delete all data and insert
-	data = pd.read_excel('category.xlsx', 'balance', index_col=None)
+	data = pd.read_excel('resource/category.xlsx', 'balance', index_col=None)
 	data = data.where(data.notnull(), None)
 	data_dict = data.to_dict(orient='index')
 	values = list(data_dict.values())
@@ -29,7 +29,7 @@ def update_category_bs():
 
 def update_category_bs_agg():
 	# delete all data and insert
-	data = pd.read_excel('category.xlsx', 'agg', index_col=None)
+	data = pd.read_excel('resource/category.xlsx', 'agg', index_col=None)
 	data = data.where(data.notnull(), None)
 	data_dict = data.to_dict(orient='index')
 	values = list(data_dict.values())

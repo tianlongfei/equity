@@ -6,7 +6,7 @@ from model_update_finreports import update_is_all, update_is_from_file
 from model_update_finreports import update_cf_all, update_cf_from_file
 from model_update_category import update_category_bs, update_category_bs_agg
 from model_update_capstruct import update_cap_struct_general_all
-
+from model_update_index import update_all_index_weight
 
 usage_prompt = """
 参考命令示例：
@@ -17,8 +17,8 @@ python model_main.py update income_statement 20000101 20180831 (日期为财报�
 python model_main.py update cash_flow_sheet 20000101 20180831 (日期为财报发布日期的起止范围)
 python model_main.py update category_bs (数据源：当前目录下category.xlsx的balance表)
 python model_main.py update category_bs_agg (数据源：当前目录下category.xlsx的agg表)
-python mode_main.py update cap_struct 20000101 20180831 (日期为财报end_date的起止范围，如2018年Q2的财报end_date为20180630)
-
+python model_main.py update cap_struct 20000101 20180831 (日期为财报end_date的起止范围，如2018年Q2的财报end_date为20180630)
+python model_main.py update index_weight 20180101 20180831（日期为指数权重的交易日）
 """
 
 
@@ -62,6 +62,10 @@ if __name__ == '__main__':
 			start_date = sys.argv[3]
 			end_date = sys.argv[4]
 			update_cap_struct_general_all(start_date, end_date)
+		elif table == 'index_weight' and len(sys.argv) == 5 and isValidDate(sys.argv[3]) and isValidDate(sys.argv[4]):
+			start_date = sys.argv[3]
+			end_date = sys.argv[4]
+			update_all_index_weight(start_date, end_date)
 		else:
 			print('参数不正确, ', usage_prompt)
 	elif task == 'create' and len(sys.argv) == 2:
