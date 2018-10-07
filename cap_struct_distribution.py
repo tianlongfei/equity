@@ -43,7 +43,7 @@ max_r = 1.0
 
 # plt.style.use('bmh')
 plt.close('all')
-fig = plt.figure(figsize=(13.66, 6.36))	# 大小：1366*636
+fig = plt.figure(figsize=(13.66, 6.36))	# 大小：1366*636，默认dpi=100，figsize单位inch英寸
 gs = gridspec.GridSpec(3, 3)
 
 for i in range(0,3):
