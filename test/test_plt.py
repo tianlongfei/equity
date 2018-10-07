@@ -3,6 +3,51 @@ import numpy as np
 import pandas as pd
 
 
+df = pd.DataFrame({'animal': 'cat dog cat fish dog cat cat'.split(),
+				   'size': list('SSMMMLL'),
+				   'weight': [8, 10, 11, 1, 20, 12, 12],
+				   'height': [8, 10, 11, 1, 20, 12, 12],
+				   'adult' : [False] * 5 + [True] * 2})
+print(df)
+
+# 列相乘
+# a = df[['weight', 'height']].multiply(df['height'], axis='index')
+# print(a)
+
+# aggregate
+# gpd = df.groupby('animal')
+# gpd = gpd.agg({'weight': 'sum', 'size': 'count'})	# dict {column name: aggregate function}
+# print(gpd)
+
+# transform: 对group后的每一组的每一列的每个值操作，最后返回group之前的df的结构
+# g = df.groupby('animal')['weight']
+# df['weight_salarize'] = g.transform(lambda x: x/x.sum())
+# print(df)
+
+# apply可以替代transform和aggregate，但不自动检查列是否适合函数(比如对str类型的行进行sum)，不合适会报错，但后两者可以自动去掉不合适函数的行
+
+
+# df_1 = df.groupby('animal').apply(lambda subf: subf[:])
+# print(df_1)
+
+# for name, gp in df.groupby('animal'):
+# 	print(gp)
+
+
+comp_type_for_index = {
+	'w_all_add': '所有企业，简单相加', 
+	'w_all_equal': '所有企业，等权重，等于简单相加/企业总数，跟标准权重具有可比性', 
+	'w_all_std': '所有企业，标准权重',
+	'w_general_add': '一般工商企业，简单相加', 
+	'w_general_equal': '一般工商企业，等权重，等于简单相加/企业总数', 
+	'w_general_std': '一般工商企业，标准权重'
+}
+
+print(list(comp_type_for_index.keys()))
+
+
+# pandas 基本功
+# DataFrame增加一列，等于另外两列的和，另外列的函数，另一列符合某些条件时赋值
 
 'matplotlib'
 '整体风格，style'

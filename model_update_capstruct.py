@@ -22,8 +22,8 @@ def cal_cap_struct_general(ts_code_list, start_date, end_date):
 	ts_code_str = '"' + '","'.join(map(str, ts_code_list)) + '"'	# list to string with ""
 	sql = "select * from balance_sheet where ts_code in (%s) and end_date >= '%s' and end_date <= '%s' and report_type = 1 and comp_type=1" % (ts_code_str, start_date, end_date)
 	bs = pd.read_sql_query(sql, engine)
-	bs.drop_duplicates(['ts_code', 'end_date'], inplace=True)	# 去除可能的重复数据
-	bs.drop(columns=['ann_date', 'f_ann_date', 'report_type', 'comp_type'], inplace=True)	# 去除不需要的行
+	bs.drop_duplicates(['ts_code', 'end_date'], inplace=True)	# 去除可能key重复的行
+	bs.drop(columns=['ann_date', 'f_ann_date', 'report_type', 'comp_type'], inplace=True)	# 去除不需要的列
 	bs.set_index(['ts_code', 'end_date'], inplace=True)
 	bs = bs.where(bs.notnull(), 0.0)	# 将Nan和None替换成0.0
 	# print(bs)
